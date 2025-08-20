@@ -1,4 +1,9 @@
+
+[노션으로 보기](https://harsh-cabbage-818.notion.site/24904fe2aebc80bc9452e83db568a0ba?source=copy_link) 
+
+
 이 프로젝트는 `yfinance` API로 미국 주식 데이터를 매일 수집하고 `PostgreSQL` 적재, 전처리, 간단한 ML 모델 학습, Slack 자동 알림까지 연결되는 End-to-End 자동화 파이프라인 구축을 목표로 했습니다.
+
 
 # DAG
 
