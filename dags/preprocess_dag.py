@@ -90,13 +90,6 @@ with DAG(dag_id='Preprocess',
     df_task = read_data()                      # 1) Postgres에서 원본 stock_info 테이블 읽기
     preprocessed_df = preprocess(df_task)      # 2) 결측치 제거 + MinMax 스케일링
     cleaned_task = insert_cleaned_stock(preprocessed_df)  # 3) 전처리 데이터 cleaned_stock_info 테이블에 삽입
-    cleaned_df = read_cleaned_data()           # 4) DB에 삽입된 데이터를 다시 읽어 DataFrame으로 반환
-
+    
     # 의존성 연결
-    preprocessed_df >> cleaned_task >> cleaned_df  
-    # - preprocessed_df 완료 후 cleaned_task 실행
-    # - cleaned_task 완료 후 cleaned_df 실행 (DB 삽입 후 읽기 보장)
-
-
-    # 의존성 연결: cleaned_df 완료 후 세 모델 학습 태스크 병렬 실행
-    cleaned_df
+    preprocessed_df >> cleaned_task

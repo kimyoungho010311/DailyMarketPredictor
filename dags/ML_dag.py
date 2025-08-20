@@ -22,7 +22,7 @@ default_args = {'owner': dag_owner,
 ###########
 log = LoggingMixin().log
 
-def ready_to_ml(df):
+def read_to_ml(df):
     X = df[['open', 'low','close','volume']]
     y = df['high']
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -49,7 +49,7 @@ with DAG(dag_id='ML',
 
     @task(retries=5, retry_delay=timedelta(seconds=2))
     def linear(df):
-        X_train, X_test, y_train, y_test = ready_to_ml(df)
+        X_train, X_test, y_train, y_test = read_to_ml(df)
         lr = LinearRegression()
         lr.fit(X_train, y_train)
         y_pred_lr = lr.predict(X_test)
@@ -60,7 +60,7 @@ with DAG(dag_id='ML',
     
     @task(retries=5, retry_delay=timedelta(seconds=2))
     def ridge(df):
-        X_train, X_test, y_train, y_test = ready_to_ml(df)
+        X_train, X_test, y_train, y_test = read_to_ml(df)
         ridge = Ridge(alpha=1.0)
         ridge.fit(X_train,y_train)
         y_pred_ridge = ridge.predict(X_test)
@@ -71,7 +71,7 @@ with DAG(dag_id='ML',
 
     @task(retries=5, retry_delay=timedelta(seconds=2))
     def lasso(df):
-        X_train, X_test, y_train, y_test = ready_to_ml(df)
+        X_train, X_test, y_train, y_test = read_to_ml(df)
         lasso = Lasso(alpha=0.1)
         lasso.fit(X_train,y_train)
         y_pred_lasso = lasso.predict(X_test)
