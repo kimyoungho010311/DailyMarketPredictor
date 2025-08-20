@@ -43,9 +43,11 @@
 - `create_cleaned_stock_table` : 전처리된 주식 데이터를 저장할 테이블을 생성합니다.
 - `insert_stock_info_to_db` : 원본 주식 데이터를 DB에 저장합니다.
 
-![스크린샷 2025-08-20 오전 10.16.28.png](attachment:26f6575d-45a4-46aa-96de-3242ad792a9f:스크린샷_2025-08-20_오전_10.16.28.png)
+<img width="938" height="326" alt="스크린샷 2025-08-20 오전 11 13 22" src="https://github.com/user-attachments/assets/5b6208f0-9d24-4021-a3fc-dfa369c511ba" />
 
 ## Preprocess
+
+
 
 이 DAG는 원본 주식 데이터를 전처리 하는 DAG입니다.
 
@@ -83,7 +85,7 @@ from datetime import datetime, timedelta
 - `preprocess` : 전처리를 하는 Task 입니다. 간단하게 Min-Max 스케일링을 합니다.
 - `insert_cleaned_stock` : 전처리 완료한 데이터를 DB에 입력합니다.
 
-![스크린샷 2025-08-20 오전 10.37.48.png](attachment:b6c4e011-e4b1-4cfa-8f91-c7ea6051d07e:스크린샷_2025-08-20_오전_10.37.48.png)
+<img width="932" height="251" alt="스크린샷 2025-08-20 오전 11 14 00" src="https://github.com/user-attachments/assets/01cbca6a-19ac-4c91-b208-3edfb196cd24" />
 
 ## ML
 
@@ -105,8 +107,7 @@ from datetime import datetime, timedelta
     # 의존성 연결: cleaned_df 완료 후 세 모델 학습 태스크 병렬 실행
     [linear_task, ridge_task, lasso_task]
 ```
-
-![스크린샷 2025-08-20 오전 10.42.05.png](attachment:b8c30573-ed3f-41de-930f-db33977276e3:스크린샷_2025-08-20_오전_10.42.05.png)
+<img width="872" height="589" alt="스크린샷 2025-08-20 오전 11 14 17" src="https://github.com/user-attachments/assets/8416f319-33c3-4704-a256-a5a67bbbd9de" />
 
 ## Slack
 
@@ -120,7 +121,7 @@ Slack은 아래 Task 로 이루어져 있습니다.
 
 - `send_msg` : Slack에서 메세지를 보내는 Task 입니다.
 
-![스크린샷 2025-08-20 오전 10.46.26.png](attachment:52a2dc23-0f01-42e0-bedb-5ea32e057db1:스크린샷_2025-08-20_오전_10.46.26.png)
+<img width="660" height="397" alt="스크린샷 2025-08-20 오전 11 14 41" src="https://github.com/user-attachments/assets/bc5b4892-2044-49d1-9ce8-34bbecc90ca2" />
 
 위 사진과 같이 매일 아침 정해진 시간에 ML 학습 결과를 전송함을 확인하였습니다.
 
